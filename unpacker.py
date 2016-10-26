@@ -76,7 +76,8 @@ def frames_from_data(filename, ext):
         json_data = open(data_filename)
         data = json.load(json_data)
         frames = {}
-        for f in data['frames']:
+        for g in data['frames']:
+            f = data['frames'][g]
             x = int(f["frame"]["x"])
             y = int(f["frame"]["y"])
             w = int(f["frame"]["h"] if f['rotated'] else f["frame"]["w"])
@@ -102,7 +103,7 @@ def frames_from_data(filename, ext):
                 ),
                 'rotated': f['rotated']
             }
-            frames[f["filename"]] = d
+            frames[g] = d
         json_data.close()
         return frames.items()
     else:
